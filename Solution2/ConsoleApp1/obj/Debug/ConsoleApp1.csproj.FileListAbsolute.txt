@@ -1,0 +1,6 @@
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\obj\Debug\ConsoleApp1.csprojResolveAssemblyReference.cache
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+c:\users\genesys\documents\visual studio 2017\Projects\Solution2\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
