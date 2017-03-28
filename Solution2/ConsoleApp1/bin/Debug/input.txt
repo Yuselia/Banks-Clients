@@ -1,11 +1,7 @@
-Bank: VTB24
-Client: Filimonov Anton, 11.11.2011
-Client: Petrov Ivan Petrovich, 22.11.2002
-
 Bank: Sberbank
-Client: Ivanov Petr, 22.11.1111
+Client: Petrov Ildar, 12.06.2000
+Client: Popov Stepan, 13.09.1999
 
-Bank: Tinkoff
-Client: Ivanov Petr, 23.01.2000
-Client: Chernov Karl Ivanovich, 23.01.2000
-Client: Yushkov Vladimir, 16.10.1988
+Bank: VTB
+Client: Orlov Oleg, 11.09.1998
+Client: Lotk Olga, 14.05.1997
