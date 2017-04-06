@@ -38,7 +38,7 @@ namespace ConsoleApp1
         /// <param name="name">string, which contains name of client</param>
         /// <param name="date">string, which contains name of client</param>
         /// <param name="bank">Bank, which client in</param>
-        /// <returns></returns>
+        /// <returns>Client, which was created</returns>
         public Client CreateClient(string name, string date, Bank bank)
         {
             Client client = new Client();

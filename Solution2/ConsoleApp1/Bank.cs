@@ -25,7 +25,7 @@ namespace ConsoleApp1
         /// Creating a bank
         /// </summary>
         /// <param name="text">String, which contains name of bank</param>
-        /// <returns></returns>
+        /// <returns>Bank, which was created</returns>
         public Bank CreateBank(string text)
         {
             Bank bank = new Bank();

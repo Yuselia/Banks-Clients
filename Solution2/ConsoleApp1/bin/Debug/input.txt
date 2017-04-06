@@ -1,7 +1,16 @@
-Bank: Sberbank
-Client: Petrov Ildar, 12.06.2000
-Client: Popov Stepan, 13.09.1999
-
 Bank: VTB
-Client: Orlov Oleg, 11.09.1998
-Client: Lotk Olga, 14.05.1997
+Client: Roman, 12.12.2008
+Client: Stepan, 11.11.2009
+
+Bank: Sber
+Client: Vasiliy, 12.12.2008
+
+Bank: Tinkof
+Client: Lubov, 15.09.2008
+Client: Ekaterina, 11.07.2000
+Client: Omeliya, 12.12.2008
+Client: Sasha, 14.04.2000
+
+Bank: Soglasie
+Client: Stepan, 15.03.2000
+Client: Ignat, 12.02.2001
