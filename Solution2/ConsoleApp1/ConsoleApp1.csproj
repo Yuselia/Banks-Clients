@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Bank.cs" />
     <Compile Include="BankException.cs" />
+    <Compile Include="Checker.cs" />
     <Compile Include="DialogWithUser.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="TextAnalisator.cs" />

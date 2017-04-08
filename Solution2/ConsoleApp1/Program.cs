@@ -12,9 +12,11 @@ namespace ConsoleApp1
         public static string pathToInputFile = "";
         public static string pathToOutputFile = ""; 
 
-        public const string separatingOnBlocks = "Bank: ";
-        public const string separatingOnBanksAndClients = "Client: ";
+        public const string stringBank = "Bank:";
+        public const string stringClient = "Client: ";
         public const string separatingOnNameAndDate = ", ";
+        public const string separatingOnBlocks = "\r\n\r\n";
+        public const string separatingBlocksOnStrings = "\r\n";
 
         public const string question1 = "Do you want to write banks or clients?\n Write '1' to write banks.\n Write '2' to write clients";
         public const string question2 = "Do you want to write to console or to file?\n Write '1' to write to console.\n Write '2' to write to file";
@@ -24,14 +26,13 @@ namespace ConsoleApp1
             ReadSetting("InputFile", "OutputFile");
             List<Bank> banks = new List<Bank>();
             List<Client> clients = new List<Client>();
-            Writer.WritedToFile += EndWritingToFile;
+            Writer.WritingComplete += EndWriting;
             TextAnalisator.BanksAndClientsWereCreated += EndTextAnalise;
 
             if (FileWorker.FindFile(pathToInputFile)&&(FileWorker.FileNoEmpty(FileWorker.ReadText(pathToInputFile))))
             {
                 string textFromFile= FileWorker.ReadText(pathToInputFile);
-                if (TextAnalisator.BankPresentInText(textFromFile))
-                {
+
                     banks = TextAnalisator.GetBanks(textFromFile);
                     clients = TextAnalisator.GetClients(banks);
 
@@ -51,12 +52,11 @@ namespace ConsoleApp1
                     }
                     else
                         if (DialogWithUser.Choose(answerBanks))
-                    {
-                        Writer.Write<Bank>(WriteOnConsole, GetStringWithBanks, banks);
-                    }
+                        {
+                            Writer.Write<Bank>(WriteOnConsole, GetStringWithBanks, banks);
+                        }
                     else Writer.Write<Client>(WriteOnConsole, GetStringWithClients, clients);
-                }
-                Writer.WritedToFile -= EndWritingToFile;
+                Writer.WritingComplete -= EndWriting;
                 TextAnalisator.BanksAndClientsWereCreated -= EndTextAnalise;
                 Console.Read();
             }
@@ -74,7 +74,6 @@ namespace ConsoleApp1
                 {
                     file.WriteLine(s);
                 }
-                //Writer.WritedToFile(); //Why I can't do it? 
         }
 
         private static void EndTextAnalise()
@@ -82,9 +81,9 @@ namespace ConsoleApp1
             Console.WriteLine("End analise file, were created banks and clients");
         }
 
-        private static void EndWritingToFile()
+        private static void EndWriting()
         {
-            Console.WriteLine("Information was write to file");
+            Console.WriteLine("Information was write");
         }
 
         private static string GetStringWithBanks(List<Bank> bankList)

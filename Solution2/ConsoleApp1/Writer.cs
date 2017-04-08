@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public delegate void WritingFunction(string s);
         public delegate string ListToStringFunction<T>(List<T> objects);
 
-        public static event Action WritedToFile;
+        public static event Action WritingComplete;
 
         /// <summary>
         /// Write objects (banks or clients)
@@ -24,7 +24,7 @@ namespace ConsoleApp1
         {
             string s = myDelegate2(objects);
             myDelegate1(s);
-            WritedToFile();
+            WritingComplete();
         }
     }
 }

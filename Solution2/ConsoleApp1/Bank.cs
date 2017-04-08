@@ -8,10 +8,15 @@ namespace ConsoleApp1
 {
     internal class Bank
     {
+        public Bank()
+        {
+            clients = new List<Client>();
+        }
+
         /// <summary>
         /// List with banks clients
         /// </summary>
-        public List<Client> clients { get; set;  }
+        public List<Client> clients { get; private set;  }
 
         /// <summary>
         /// Getter and setter for Name
@@ -26,11 +31,14 @@ namespace ConsoleApp1
         /// </summary>
         /// <param name="text">String, which contains name of bank</param>
         /// <returns>Bank, which was created</returns>
-        public Bank CreateBank(string text)
+        public static Bank CreateBank(string text)
         {
+            if (String.IsNullOrEmpty(text))
+            {
+                throw new BankException("Bank's name is empty");
+            }
             Bank bank = new Bank();
             bank.Name = text;
-            clients = new List<Client>();
             return bank;
         }
     }

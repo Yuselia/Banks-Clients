@@ -16,34 +16,23 @@ namespace ConsoleApp1
         /// <param name="text">Text, which must be separate</param>
         /// <param name="separatingString">String, which separate text</param>
         /// <returns>strings after separate</returns>
-        public static string[] Separate(string text, string[] separatingString)
+        public static string[] Separate(string text, string separatingString)
         {
-            string[] parts = text.Split(separatingString, System.StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = text.Split(new string[] { separatingString }, System.StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < parts.Length; i++)
             {
-                parts[i] = parts[i].Trim('\n', '\r');
+                parts[i] = parts[i].Trim('\n', '\r', ' ');
             }
             return parts;
         }
-
-        /// <summary>
-        /// Is string "Bank: " present in text?
-        /// </summary>
-        /// <param name="text">Text from file</param>
-        /// <returns>Return true if "Bank: " present in text</returns>
-        public static bool BankPresentInText(string text)
+        public static string[] Separate(string text, string[] separatingStrings)
         {
-            bool bankPresent=false;
-            StringBuilder temp = new StringBuilder();
-            for (int i=0; i<6; i++)
+            string[] parts = text.Split( separatingStrings, System.StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < parts.Length; i++)
             {
-                temp.Append(text[i]);
+                parts[i] = parts[i].Trim('\n', '\r', ' ');
             }
-            int control = String.Compare(Convert.ToString(temp), Program.separatingOnBlocks);
-            if (control==0)
-                bankPresent=true;
-            else Console.WriteLine("There are no banks in file");
-            return bankPresent;
+            return parts;
         }
 
         /// <summary>
@@ -54,24 +43,48 @@ namespace ConsoleApp1
         public static List<Bank> GetBanks(string text)
         {
             List<Bank> banks = new List<Bank>();
-                string[] blocks = Separate(text, new string[] { Program.separatingOnBlocks });
-                foreach (string block in blocks)
+            string[] blocks = Separate(text, Program.separatingOnBlocks );
+            foreach (string block in blocks)
+            {
+                if (Checker.Check(block, Program.stringBank))
                 {
-                    string[] partsInBlock = Separate(block, new string[] { Program.separatingOnBanksAndClients });
-                    Bank bank = new Bank();
-                    bank = bank.CreateBank(partsInBlock[0]);
-                    banks.Add(bank);
-                    bank.clients = new List<Client>();
-
-                    for (int i = 1; i < partsInBlock.Length; i++)
+                    string[] stringsInBlock = Separate(block, Program.separatingBlocksOnStrings);
+                    string[] s = Separate(stringsInBlock[0], Program.stringBank);
+                    try
                     {
-                        string[] nameAndDate = Separate(partsInBlock[i], new string[] { Program.separatingOnNameAndDate });
-                        Client client = new Client();
-                        client = client.CreateClient(nameAndDate[0], nameAndDate[1], bank);
-                        bank.clients.Add(client);
-                        client.Bank = bank;
+                        Bank bank = Bank.CreateBank(s[0]);
+                        banks.Add(bank);
+                        for (int i = 1; i < stringsInBlock.Length; i++)
+                        {
+                            if (Checker.Check(stringsInBlock[i], Program.stringClient))
+                            {
+                                string[] separating = { Program.separatingOnNameAndDate, Program.stringClient };
+                                string[] nameAndDate = Separate(stringsInBlock[i], separating);
+                                Client client = new Client();
+                                client = client.CreateClient(nameAndDate[0], nameAndDate[1], bank);
+                                bank.clients.Add(client);
+                                client.Bank = bank;
+                            }
+                            else
+                            {
+                                Console.WriteLine("One or more string doesn't contain string 'Client:'");
+                            }
+                        }
+                    }
+                    catch(BankException e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    catch(IndexOutOfRangeException e)
+                    {
+                        Console.WriteLine("You shoud check your input file!\nSome information in file was wrong. String with wrong information wasn't created");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("One or more block in text doesn't contain string 'Bank:'");
+                }
+            }
             BanksAndClientsWereCreated();
             return banks;
         }
